@@ -8,7 +8,7 @@
 ###############################################
 
 base_dir="../../staging/src/k8s.io/client-go"
-exclude_dirs=("admission" "admissionregistration" "authentication" "authorization" "autoscaling" "certificates" "networking" "policy" "policy" "storage" "testdata") 
+exclude_dirs=("admission" "admissionregistration" "authentication" "authorization" "autoscaling" "certificates" "networking" "policy" "rbac" "storage" "testdata") 
 target_dirs=("applyconfigurations" "informers" "listers" "kubernetes/typed")
 
 function delete_version()

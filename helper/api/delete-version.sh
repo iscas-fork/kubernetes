@@ -5,7 +5,7 @@
 ###############################################
 
 base_dir="../../staging/src/k8s.io/api"
-exclude_dirs=("admission" "certificates" "testdata" "autoscaling")  
+exclude_dirs=("admission" "admissionregistration" "authentication" "authorization" "autoscaling" "certificates" "networking" "policy" "policy" "storage" "testdata")  
 
 
 function delete_version()

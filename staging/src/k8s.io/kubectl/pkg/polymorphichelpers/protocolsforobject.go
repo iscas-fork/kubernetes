@@ -21,8 +21,6 @@ import (
 	"strconv"
 
 	appsv1 "k8s.io/api/apps/v1"
-	appsv1beta1 "k8s.io/api/apps/v1beta1"
-	appsv1beta2 "k8s.io/api/apps/v1beta2"
 	corev1 "k8s.io/api/core/v1"
 	extensionsv1beta1 "k8s.io/api/extensions/v1beta1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -44,16 +42,10 @@ func protocolsForObject(object runtime.Object) (map[string]string, error) {
 		return getProtocols(t.Spec.Template.Spec), nil
 	case *appsv1.Deployment:
 		return getProtocols(t.Spec.Template.Spec), nil
-	case *appsv1beta2.Deployment:
-		return getProtocols(t.Spec.Template.Spec), nil
-	case *appsv1beta1.Deployment:
-		return getProtocols(t.Spec.Template.Spec), nil
 
 	case *extensionsv1beta1.ReplicaSet:
 		return getProtocols(t.Spec.Template.Spec), nil
 	case *appsv1.ReplicaSet:
-		return getProtocols(t.Spec.Template.Spec), nil
-	case *appsv1beta2.ReplicaSet:
 		return getProtocols(t.Spec.Template.Spec), nil
 
 	default:

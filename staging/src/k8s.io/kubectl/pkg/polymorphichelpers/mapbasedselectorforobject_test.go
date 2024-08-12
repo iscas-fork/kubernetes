@@ -20,8 +20,6 @@ import (
 	"testing"
 
 	appsv1 "k8s.io/api/apps/v1"
-	appsv1beta1 "k8s.io/api/apps/v1beta1"
-	appsv1beta2 "k8s.io/api/apps/v1beta2"
 	corev1 "k8s.io/api/core/v1"
 	extensionsv1beta1 "k8s.io/api/extensions/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -178,89 +176,6 @@ func TestMapBasedSelectorForObject(t *testing.T) {
 			expectErr: true,
 		},
 		// apps/v1beta2 Deployment with labels and selectors
-		{
-			object: &appsv1beta2.Deployment{
-				Spec: appsv1beta2.DeploymentSpec{
-					Template: corev1.PodTemplateSpec{
-						ObjectMeta: metav1.ObjectMeta{
-							Labels: map[string]string{
-								"foo": "bar",
-							},
-						},
-					},
-					Selector: &metav1.LabelSelector{
-						MatchLabels: map[string]string{
-							"foo": "bar",
-						},
-					},
-				},
-			},
-			expectSelector: "foo=bar",
-		},
-		// apps/v1beta2 Deployment with only labels (no selectors) -- error
-		{
-			object: &appsv1beta2.Deployment{
-				Spec: appsv1beta2.DeploymentSpec{
-					Template: corev1.PodTemplateSpec{
-						ObjectMeta: metav1.ObjectMeta{
-							Labels: map[string]string{
-								"foo": "bar",
-							},
-						},
-					},
-				},
-			},
-			expectErr: true,
-		},
-		// apps/v1beta2 Deployment with no labels or selectors -- error
-		{
-			object: &appsv1beta2.Deployment{
-				Spec: appsv1beta2.DeploymentSpec{},
-			},
-			expectErr: true,
-		},
-		// apps/v1beta1 Deployment with labels and selectors
-		{
-			object: &appsv1beta1.Deployment{
-				Spec: appsv1beta1.DeploymentSpec{
-					Template: corev1.PodTemplateSpec{
-						ObjectMeta: metav1.ObjectMeta{
-							Labels: map[string]string{
-								"foo": "bar",
-							},
-						},
-					},
-					Selector: &metav1.LabelSelector{
-						MatchLabels: map[string]string{
-							"foo": "bar",
-						},
-					},
-				},
-			},
-			expectSelector: "foo=bar",
-		},
-		// apps/v1beta1 Deployment with only labels (no selectors) -- error
-		{
-			object: &appsv1beta1.Deployment{
-				Spec: appsv1beta1.DeploymentSpec{
-					Template: corev1.PodTemplateSpec{
-						ObjectMeta: metav1.ObjectMeta{
-							Labels: map[string]string{
-								"foo": "bar",
-							},
-						},
-					},
-				},
-			},
-			expectErr: true,
-		},
-		// apps/v1beta1 Deployment with no labels or selectors -- error
-		{
-			object: &appsv1beta1.Deployment{
-				Spec: appsv1beta1.DeploymentSpec{},
-			},
-			expectErr: true,
-		},
 		// extensions/v1beta1 ReplicaSet with labels and selectors
 		{
 			object: &extensionsv1beta1.ReplicaSet{
@@ -335,41 +250,6 @@ func TestMapBasedSelectorForObject(t *testing.T) {
 		{
 			object: &appsv1.ReplicaSet{
 				Spec: appsv1.ReplicaSetSpec{
-					Template: corev1.PodTemplateSpec{
-						ObjectMeta: metav1.ObjectMeta{
-							Labels: map[string]string{
-								"foo": "bar",
-							},
-						},
-					},
-				},
-			},
-			expectErr: true,
-		},
-		// apps/v1beta2 ReplicaSet with labels and selectors
-		{
-			object: &appsv1beta2.ReplicaSet{
-				Spec: appsv1beta2.ReplicaSetSpec{
-					Template: corev1.PodTemplateSpec{
-						ObjectMeta: metav1.ObjectMeta{
-							Labels: map[string]string{
-								"foo": "bar",
-							},
-						},
-					},
-					Selector: &metav1.LabelSelector{
-						MatchLabels: map[string]string{
-							"foo": "bar",
-						},
-					},
-				},
-			},
-			expectSelector: "foo=bar",
-		},
-		// apps/v1beta2 ReplicaSet with only labels (no selectors) -- error
-		{
-			object: &appsv1beta2.ReplicaSet{
-				Spec: appsv1beta2.ReplicaSetSpec{
 					Template: corev1.PodTemplateSpec{
 						ObjectMeta: metav1.ObjectMeta{
 							Labels: map[string]string{

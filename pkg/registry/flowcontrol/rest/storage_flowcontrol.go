@@ -55,7 +55,7 @@ const PostStartHookName = "priority-and-fairness-config-producer"
 // NewRESTStorage creates a new rest storage for flow-control api models.
 func (p RESTStorageProvider) NewRESTStorage(apiResourceConfigSource serverstorage.APIResourceConfigSource, restOptionsGetter generic.RESTOptionsGetter) (genericapiserver.APIGroupInfo, error) {
 	apiGroupInfo := genericapiserver.NewDefaultAPIGroupInfo(flowcontrol.GroupName, legacyscheme.Scheme, legacyscheme.ParameterCodec, legacyscheme.Codecs)
-	
+
 	if storageMap, err := p.storage(apiResourceConfigSource, restOptionsGetter, flowcontrolapisv1.SchemeGroupVersion); err != nil {
 		return genericapiserver.APIGroupInfo{}, err
 	} else if len(storageMap) > 0 {

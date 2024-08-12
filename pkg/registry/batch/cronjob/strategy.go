@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"strings"
 
-	batchv1beta1 "k8s.io/api/batch/v1beta1"
+	batchv1beta1 "k8s.io/api/batch/v1"
 	apiequality "k8s.io/apimachinery/pkg/api/equality"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"

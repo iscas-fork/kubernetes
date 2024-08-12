@@ -26,16 +26,15 @@ import (
 	"time"
 
 	apiserverinternalv1alpha1 "k8s.io/api/apiserverinternal/v1alpha1"
-	appsv1beta1 "k8s.io/api/apps/v1beta1"
+	appsv1beta1 "k8s.io/api/apps/v1"
 	autoscalingv1 "k8s.io/api/autoscaling/v1"
 	autoscalingv2beta1 "k8s.io/api/autoscaling/v2beta1"
 	batchv1 "k8s.io/api/batch/v1"
-	batchv1beta1 "k8s.io/api/batch/v1beta1"
 	certificatesv1alpha1 "k8s.io/api/certificates/v1alpha1"
 	certificatesv1beta1 "k8s.io/api/certificates/v1beta1"
 	coordinationv1 "k8s.io/api/coordination/v1"
 	apiv1 "k8s.io/api/core/v1"
-	discoveryv1beta1 "k8s.io/api/discovery/v1beta1"
+	discoveryv1beta1 "k8s.io/api/discovery/v1"
 	extensionsv1beta1 "k8s.io/api/extensions/v1beta1"
 	flowcontrolv1 "k8s.io/api/flowcontrol/v1"
 	networkingv1alpha1 "k8s.io/api/networking/v1alpha1"
@@ -179,10 +178,10 @@ func AddHandlers(h printers.PrintHandler) {
 
 	cronJobColumnDefinitions := []metav1.TableColumnDefinition{
 		{Name: "Name", Type: "string", Format: "name", Description: metav1.ObjectMeta{}.SwaggerDoc()["name"]},
-		{Name: "Schedule", Type: "string", Description: batchv1beta1.CronJobSpec{}.SwaggerDoc()["schedule"]},
-		{Name: "Suspend", Type: "boolean", Description: batchv1beta1.CronJobSpec{}.SwaggerDoc()["suspend"]},
-		{Name: "Active", Type: "integer", Description: batchv1beta1.CronJobStatus{}.SwaggerDoc()["active"]},
-		{Name: "Last Schedule", Type: "string", Description: batchv1beta1.CronJobStatus{}.SwaggerDoc()["lastScheduleTime"]},
+		{Name: "Schedule", Type: "string", Description: batchv1.CronJobSpec{}.SwaggerDoc()["schedule"]},
+		{Name: "Suspend", Type: "boolean", Description: batchv1.CronJobSpec{}.SwaggerDoc()["suspend"]},
+		{Name: "Active", Type: "integer", Description: batchv1.CronJobStatus{}.SwaggerDoc()["active"]},
+		{Name: "Last Schedule", Type: "string", Description: batchv1.CronJobStatus{}.SwaggerDoc()["lastScheduleTime"]},
 		{Name: "Age", Type: "string", Description: metav1.ObjectMeta{}.SwaggerDoc()["creationTimestamp"]},
 		{Name: "Containers", Type: "string", Priority: 1, Description: "Names of each container in the template."},
 		{Name: "Images", Type: "string", Priority: 1, Description: "Images referenced by each container in the template."},

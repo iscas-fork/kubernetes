@@ -20,7 +20,7 @@ import (
 	"context"
 	"fmt"
 
-	appsv1beta1 "k8s.io/api/apps/v1beta1"
+	appsv1beta1 "k8s.io/api/apps/v1"
 	extensionsv1beta1 "k8s.io/api/extensions/v1beta1"
 	apiequality "k8s.io/apimachinery/pkg/api/equality"
 	apivalidation "k8s.io/apimachinery/pkg/api/validation"

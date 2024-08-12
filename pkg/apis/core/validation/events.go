@@ -22,7 +22,7 @@ import (
 	"time"
 
 	v1 "k8s.io/api/core/v1"
-	eventsv1beta1 "k8s.io/api/events/v1beta1"
+	eventsv1beta1 "k8s.io/api/events/v1"
 	apimachineryvalidation "k8s.io/apimachinery/pkg/api/validation"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"

@@ -76,9 +76,6 @@ import (
 	"k8s.io/klog/v2"
 	api "k8s.io/kubernetes/pkg/apis/core"
 	flowcontrolv1 "k8s.io/kubernetes/pkg/apis/flowcontrol/v1"
-	flowcontrolv1beta1 "k8s.io/kubernetes/pkg/apis/flowcontrol/v1beta1"
-	flowcontrolv1beta2 "k8s.io/kubernetes/pkg/apis/flowcontrol/v1beta2"
-	flowcontrolv1beta3 "k8s.io/kubernetes/pkg/apis/flowcontrol/v1beta3"
 	"k8s.io/kubernetes/pkg/controlplane/apiserver/options"
 	"k8s.io/kubernetes/pkg/controlplane/controller/apiserverleasegc"
 	"k8s.io/kubernetes/pkg/controlplane/controller/clusterauthenticationtrust"
@@ -753,23 +750,11 @@ var (
 		schedulingapiv1.SchemeGroupVersion,
 		flowcontrolv1.SchemeGroupVersion,
 	}
-
-	// legacyBetaEnabledByDefaultResources is the list of beta resources we enable.  You may only add to this list
-	// if your resource is already enabled by default in a beta level we still serve AND there is no stable API for it.
-	// see https://github.com/kubernetes/enhancements/tree/master/keps/sig-architecture/3136-beta-apis-off-by-default
-	// for more details.
-	legacyBetaEnabledByDefaultResources = []schema.GroupVersionResource{
-		flowcontrolv1beta3.SchemeGroupVersion.WithResource("flowschemas"),                 // deprecate in 1.29, remove in 1.32
-		flowcontrolv1beta3.SchemeGroupVersion.WithResource("prioritylevelconfigurations"), // deprecate in 1.29, remove in 1.32
-	}
 	// betaAPIGroupVersionsDisabledByDefault is for all future beta groupVersions.
 	betaAPIGroupVersionsDisabledByDefault = []schema.GroupVersion{
 		admissionregistrationv1beta1.SchemeGroupVersion,
 		authenticationv1beta1.SchemeGroupVersion,
 		storageapiv1beta1.SchemeGroupVersion,
-		flowcontrolv1beta1.SchemeGroupVersion,
-		flowcontrolv1beta2.SchemeGroupVersion,
-		flowcontrolv1beta3.SchemeGroupVersion,
 	}
 
 	// alphaAPIGroupVersionsDisabledByDefault holds the alpha APIs we have.  They are always disabled by default.
@@ -793,9 +778,6 @@ func DefaultAPIResourceConfigSource() *serverstorage.ResourceConfig {
 	// disable alpha and beta versions explicitly so we have a full list of what's possible to serve
 	ret.DisableVersions(betaAPIGroupVersionsDisabledByDefault...)
 	ret.DisableVersions(alphaAPIGroupVersionsDisabledByDefault...)
-
-	// enable the legacy beta resources that were present before stopped serving new beta APIs by default.
-	ret.EnableResources(legacyBetaEnabledByDefaultResources...)
 
 	return ret
 }

@@ -17,7 +17,7 @@ limitations under the License.
 package appsint
 
 import (
-	appsv1beta2 "k8s.io/api/apps/v1beta2"
+	appsv1beta2 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	scalescheme "k8s.io/client-go/scale/scheme"

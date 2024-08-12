@@ -28,8 +28,6 @@ import (
 	admissionregistrationv1beta1 "k8s.io/client-go/kubernetes/typed/admissionregistration/v1beta1"
 	internalv1alpha1 "k8s.io/client-go/kubernetes/typed/apiserverinternal/v1alpha1"
 	appsv1 "k8s.io/client-go/kubernetes/typed/apps/v1"
-	appsv1beta1 "k8s.io/client-go/kubernetes/typed/apps/v1beta1"
-	appsv1beta2 "k8s.io/client-go/kubernetes/typed/apps/v1beta2"
 	authenticationv1 "k8s.io/client-go/kubernetes/typed/authentication/v1"
 	authenticationv1alpha1 "k8s.io/client-go/kubernetes/typed/authentication/v1alpha1"
 	authenticationv1beta1 "k8s.io/client-go/kubernetes/typed/authentication/v1beta1"
@@ -40,28 +38,19 @@ import (
 	autoscalingv2beta1 "k8s.io/client-go/kubernetes/typed/autoscaling/v2beta1"
 	autoscalingv2beta2 "k8s.io/client-go/kubernetes/typed/autoscaling/v2beta2"
 	batchv1 "k8s.io/client-go/kubernetes/typed/batch/v1"
-	batchv1beta1 "k8s.io/client-go/kubernetes/typed/batch/v1beta1"
 	certificatesv1 "k8s.io/client-go/kubernetes/typed/certificates/v1"
 	certificatesv1alpha1 "k8s.io/client-go/kubernetes/typed/certificates/v1alpha1"
 	certificatesv1beta1 "k8s.io/client-go/kubernetes/typed/certificates/v1beta1"
 	coordinationv1 "k8s.io/client-go/kubernetes/typed/coordination/v1"
-	coordinationv1beta1 "k8s.io/client-go/kubernetes/typed/coordination/v1beta1"
 	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
 	discoveryv1 "k8s.io/client-go/kubernetes/typed/discovery/v1"
-	discoveryv1beta1 "k8s.io/client-go/kubernetes/typed/discovery/v1beta1"
 	eventsv1 "k8s.io/client-go/kubernetes/typed/events/v1"
-	eventsv1beta1 "k8s.io/client-go/kubernetes/typed/events/v1beta1"
 	extensionsv1beta1 "k8s.io/client-go/kubernetes/typed/extensions/v1beta1"
 	flowcontrolv1 "k8s.io/client-go/kubernetes/typed/flowcontrol/v1"
-	flowcontrolv1beta1 "k8s.io/client-go/kubernetes/typed/flowcontrol/v1beta1"
-	flowcontrolv1beta2 "k8s.io/client-go/kubernetes/typed/flowcontrol/v1beta2"
-	flowcontrolv1beta3 "k8s.io/client-go/kubernetes/typed/flowcontrol/v1beta3"
 	networkingv1 "k8s.io/client-go/kubernetes/typed/networking/v1"
 	networkingv1alpha1 "k8s.io/client-go/kubernetes/typed/networking/v1alpha1"
 	networkingv1beta1 "k8s.io/client-go/kubernetes/typed/networking/v1beta1"
 	nodev1 "k8s.io/client-go/kubernetes/typed/node/v1"
-	nodev1alpha1 "k8s.io/client-go/kubernetes/typed/node/v1alpha1"
-	nodev1beta1 "k8s.io/client-go/kubernetes/typed/node/v1beta1"
 	policyv1 "k8s.io/client-go/kubernetes/typed/policy/v1"
 	policyv1beta1 "k8s.io/client-go/kubernetes/typed/policy/v1beta1"
 	rbacv1 "k8s.io/client-go/kubernetes/typed/rbac/v1"
@@ -69,8 +58,6 @@ import (
 	rbacv1beta1 "k8s.io/client-go/kubernetes/typed/rbac/v1beta1"
 	resourcev1alpha2 "k8s.io/client-go/kubernetes/typed/resource/v1alpha2"
 	schedulingv1 "k8s.io/client-go/kubernetes/typed/scheduling/v1"
-	schedulingv1alpha1 "k8s.io/client-go/kubernetes/typed/scheduling/v1alpha1"
-	schedulingv1beta1 "k8s.io/client-go/kubernetes/typed/scheduling/v1beta1"
 	storagev1 "k8s.io/client-go/kubernetes/typed/storage/v1"
 	storagev1alpha1 "k8s.io/client-go/kubernetes/typed/storage/v1alpha1"
 	storagev1beta1 "k8s.io/client-go/kubernetes/typed/storage/v1beta1"
@@ -85,8 +72,6 @@ type Interface interface {
 	AdmissionregistrationV1beta1() admissionregistrationv1beta1.AdmissionregistrationV1beta1Interface
 	InternalV1alpha1() internalv1alpha1.InternalV1alpha1Interface
 	AppsV1() appsv1.AppsV1Interface
-	AppsV1beta1() appsv1beta1.AppsV1beta1Interface
-	AppsV1beta2() appsv1beta2.AppsV1beta2Interface
 	AuthenticationV1() authenticationv1.AuthenticationV1Interface
 	AuthenticationV1alpha1() authenticationv1alpha1.AuthenticationV1alpha1Interface
 	AuthenticationV1beta1() authenticationv1beta1.AuthenticationV1beta1Interface
@@ -97,36 +82,25 @@ type Interface interface {
 	AutoscalingV2beta1() autoscalingv2beta1.AutoscalingV2beta1Interface
 	AutoscalingV2beta2() autoscalingv2beta2.AutoscalingV2beta2Interface
 	BatchV1() batchv1.BatchV1Interface
-	BatchV1beta1() batchv1beta1.BatchV1beta1Interface
 	CertificatesV1() certificatesv1.CertificatesV1Interface
 	CertificatesV1beta1() certificatesv1beta1.CertificatesV1beta1Interface
 	CertificatesV1alpha1() certificatesv1alpha1.CertificatesV1alpha1Interface
-	CoordinationV1beta1() coordinationv1beta1.CoordinationV1beta1Interface
 	CoordinationV1() coordinationv1.CoordinationV1Interface
 	CoreV1() corev1.CoreV1Interface
 	DiscoveryV1() discoveryv1.DiscoveryV1Interface
-	DiscoveryV1beta1() discoveryv1beta1.DiscoveryV1beta1Interface
 	EventsV1() eventsv1.EventsV1Interface
-	EventsV1beta1() eventsv1beta1.EventsV1beta1Interface
 	ExtensionsV1beta1() extensionsv1beta1.ExtensionsV1beta1Interface
 	FlowcontrolV1() flowcontrolv1.FlowcontrolV1Interface
-	FlowcontrolV1beta1() flowcontrolv1beta1.FlowcontrolV1beta1Interface
-	FlowcontrolV1beta2() flowcontrolv1beta2.FlowcontrolV1beta2Interface
-	FlowcontrolV1beta3() flowcontrolv1beta3.FlowcontrolV1beta3Interface
 	NetworkingV1() networkingv1.NetworkingV1Interface
 	NetworkingV1alpha1() networkingv1alpha1.NetworkingV1alpha1Interface
 	NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface
 	NodeV1() nodev1.NodeV1Interface
-	NodeV1alpha1() nodev1alpha1.NodeV1alpha1Interface
-	NodeV1beta1() nodev1beta1.NodeV1beta1Interface
 	PolicyV1() policyv1.PolicyV1Interface
 	PolicyV1beta1() policyv1beta1.PolicyV1beta1Interface
 	RbacV1() rbacv1.RbacV1Interface
 	RbacV1beta1() rbacv1beta1.RbacV1beta1Interface
 	RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface
 	ResourceV1alpha2() resourcev1alpha2.ResourceV1alpha2Interface
-	SchedulingV1alpha1() schedulingv1alpha1.SchedulingV1alpha1Interface
-	SchedulingV1beta1() schedulingv1beta1.SchedulingV1beta1Interface
 	SchedulingV1() schedulingv1.SchedulingV1Interface
 	StorageV1beta1() storagev1beta1.StorageV1beta1Interface
 	StorageV1() storagev1.StorageV1Interface
@@ -141,8 +115,6 @@ type Clientset struct {
 	admissionregistrationV1beta1  *admissionregistrationv1beta1.AdmissionregistrationV1beta1Client
 	internalV1alpha1              *internalv1alpha1.InternalV1alpha1Client
 	appsV1                        *appsv1.AppsV1Client
-	appsV1beta1                   *appsv1beta1.AppsV1beta1Client
-	appsV1beta2                   *appsv1beta2.AppsV1beta2Client
 	authenticationV1              *authenticationv1.AuthenticationV1Client
 	authenticationV1alpha1        *authenticationv1alpha1.AuthenticationV1alpha1Client
 	authenticationV1beta1         *authenticationv1beta1.AuthenticationV1beta1Client
@@ -153,36 +125,25 @@ type Clientset struct {
 	autoscalingV2beta1            *autoscalingv2beta1.AutoscalingV2beta1Client
 	autoscalingV2beta2            *autoscalingv2beta2.AutoscalingV2beta2Client
 	batchV1                       *batchv1.BatchV1Client
-	batchV1beta1                  *batchv1beta1.BatchV1beta1Client
 	certificatesV1                *certificatesv1.CertificatesV1Client
 	certificatesV1beta1           *certificatesv1beta1.CertificatesV1beta1Client
 	certificatesV1alpha1          *certificatesv1alpha1.CertificatesV1alpha1Client
-	coordinationV1beta1           *coordinationv1beta1.CoordinationV1beta1Client
 	coordinationV1                *coordinationv1.CoordinationV1Client
 	coreV1                        *corev1.CoreV1Client
 	discoveryV1                   *discoveryv1.DiscoveryV1Client
-	discoveryV1beta1              *discoveryv1beta1.DiscoveryV1beta1Client
 	eventsV1                      *eventsv1.EventsV1Client
-	eventsV1beta1                 *eventsv1beta1.EventsV1beta1Client
 	extensionsV1beta1             *extensionsv1beta1.ExtensionsV1beta1Client
 	flowcontrolV1                 *flowcontrolv1.FlowcontrolV1Client
-	flowcontrolV1beta1            *flowcontrolv1beta1.FlowcontrolV1beta1Client
-	flowcontrolV1beta2            *flowcontrolv1beta2.FlowcontrolV1beta2Client
-	flowcontrolV1beta3            *flowcontrolv1beta3.FlowcontrolV1beta3Client
 	networkingV1                  *networkingv1.NetworkingV1Client
 	networkingV1alpha1            *networkingv1alpha1.NetworkingV1alpha1Client
 	networkingV1beta1             *networkingv1beta1.NetworkingV1beta1Client
 	nodeV1                        *nodev1.NodeV1Client
-	nodeV1alpha1                  *nodev1alpha1.NodeV1alpha1Client
-	nodeV1beta1                   *nodev1beta1.NodeV1beta1Client
 	policyV1                      *policyv1.PolicyV1Client
 	policyV1beta1                 *policyv1beta1.PolicyV1beta1Client
 	rbacV1                        *rbacv1.RbacV1Client
 	rbacV1beta1                   *rbacv1beta1.RbacV1beta1Client
 	rbacV1alpha1                  *rbacv1alpha1.RbacV1alpha1Client
 	resourceV1alpha2              *resourcev1alpha2.ResourceV1alpha2Client
-	schedulingV1alpha1            *schedulingv1alpha1.SchedulingV1alpha1Client
-	schedulingV1beta1             *schedulingv1beta1.SchedulingV1beta1Client
 	schedulingV1                  *schedulingv1.SchedulingV1Client
 	storageV1beta1                *storagev1beta1.StorageV1beta1Client
 	storageV1                     *storagev1.StorageV1Client
@@ -212,16 +173,6 @@ func (c *Clientset) InternalV1alpha1() internalv1alpha1.InternalV1alpha1Interfac
 // AppsV1 retrieves the AppsV1Client
 func (c *Clientset) AppsV1() appsv1.AppsV1Interface {
 	return c.appsV1
-}
-
-// AppsV1beta1 retrieves the AppsV1beta1Client
-func (c *Clientset) AppsV1beta1() appsv1beta1.AppsV1beta1Interface {
-	return c.appsV1beta1
-}
-
-// AppsV1beta2 retrieves the AppsV1beta2Client
-func (c *Clientset) AppsV1beta2() appsv1beta2.AppsV1beta2Interface {
-	return c.appsV1beta2
 }
 
 // AuthenticationV1 retrieves the AuthenticationV1Client
@@ -274,11 +225,6 @@ func (c *Clientset) BatchV1() batchv1.BatchV1Interface {
 	return c.batchV1
 }
 
-// BatchV1beta1 retrieves the BatchV1beta1Client
-func (c *Clientset) BatchV1beta1() batchv1beta1.BatchV1beta1Interface {
-	return c.batchV1beta1
-}
-
 // CertificatesV1 retrieves the CertificatesV1Client
 func (c *Clientset) CertificatesV1() certificatesv1.CertificatesV1Interface {
 	return c.certificatesV1
@@ -294,10 +240,6 @@ func (c *Clientset) CertificatesV1alpha1() certificatesv1alpha1.CertificatesV1al
 	return c.certificatesV1alpha1
 }
 
-// CoordinationV1beta1 retrieves the CoordinationV1beta1Client
-func (c *Clientset) CoordinationV1beta1() coordinationv1beta1.CoordinationV1beta1Interface {
-	return c.coordinationV1beta1
-}
 
 // CoordinationV1 retrieves the CoordinationV1Client
 func (c *Clientset) CoordinationV1() coordinationv1.CoordinationV1Interface {
@@ -314,20 +256,11 @@ func (c *Clientset) DiscoveryV1() discoveryv1.DiscoveryV1Interface {
 	return c.discoveryV1
 }
 
-// DiscoveryV1beta1 retrieves the DiscoveryV1beta1Client
-func (c *Clientset) DiscoveryV1beta1() discoveryv1beta1.DiscoveryV1beta1Interface {
-	return c.discoveryV1beta1
-}
-
 // EventsV1 retrieves the EventsV1Client
 func (c *Clientset) EventsV1() eventsv1.EventsV1Interface {
 	return c.eventsV1
 }
 
-// EventsV1beta1 retrieves the EventsV1beta1Client
-func (c *Clientset) EventsV1beta1() eventsv1beta1.EventsV1beta1Interface {
-	return c.eventsV1beta1
-}
 
 // ExtensionsV1beta1 retrieves the ExtensionsV1beta1Client
 func (c *Clientset) ExtensionsV1beta1() extensionsv1beta1.ExtensionsV1beta1Interface {
@@ -337,21 +270,6 @@ func (c *Clientset) ExtensionsV1beta1() extensionsv1beta1.ExtensionsV1beta1Inter
 // FlowcontrolV1 retrieves the FlowcontrolV1Client
 func (c *Clientset) FlowcontrolV1() flowcontrolv1.FlowcontrolV1Interface {
 	return c.flowcontrolV1
-}
-
-// FlowcontrolV1beta1 retrieves the FlowcontrolV1beta1Client
-func (c *Clientset) FlowcontrolV1beta1() flowcontrolv1beta1.FlowcontrolV1beta1Interface {
-	return c.flowcontrolV1beta1
-}
-
-// FlowcontrolV1beta2 retrieves the FlowcontrolV1beta2Client
-func (c *Clientset) FlowcontrolV1beta2() flowcontrolv1beta2.FlowcontrolV1beta2Interface {
-	return c.flowcontrolV1beta2
-}
-
-// FlowcontrolV1beta3 retrieves the FlowcontrolV1beta3Client
-func (c *Clientset) FlowcontrolV1beta3() flowcontrolv1beta3.FlowcontrolV1beta3Interface {
-	return c.flowcontrolV1beta3
 }
 
 // NetworkingV1 retrieves the NetworkingV1Client
@@ -372,16 +290,6 @@ func (c *Clientset) NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Inter
 // NodeV1 retrieves the NodeV1Client
 func (c *Clientset) NodeV1() nodev1.NodeV1Interface {
 	return c.nodeV1
-}
-
-// NodeV1alpha1 retrieves the NodeV1alpha1Client
-func (c *Clientset) NodeV1alpha1() nodev1alpha1.NodeV1alpha1Interface {
-	return c.nodeV1alpha1
-}
-
-// NodeV1beta1 retrieves the NodeV1beta1Client
-func (c *Clientset) NodeV1beta1() nodev1beta1.NodeV1beta1Interface {
-	return c.nodeV1beta1
 }
 
 // PolicyV1 retrieves the PolicyV1Client
@@ -412,16 +320,6 @@ func (c *Clientset) RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface {
 // ResourceV1alpha2 retrieves the ResourceV1alpha2Client
 func (c *Clientset) ResourceV1alpha2() resourcev1alpha2.ResourceV1alpha2Interface {
 	return c.resourceV1alpha2
-}
-
-// SchedulingV1alpha1 retrieves the SchedulingV1alpha1Client
-func (c *Clientset) SchedulingV1alpha1() schedulingv1alpha1.SchedulingV1alpha1Interface {
-	return c.schedulingV1alpha1
-}
-
-// SchedulingV1beta1 retrieves the SchedulingV1beta1Client
-func (c *Clientset) SchedulingV1beta1() schedulingv1beta1.SchedulingV1beta1Interface {
-	return c.schedulingV1beta1
 }
 
 // SchedulingV1 retrieves the SchedulingV1Client
@@ -508,14 +406,6 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
-	cs.appsV1beta1, err = appsv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.appsV1beta2, err = appsv1beta2.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
 	cs.authenticationV1, err = authenticationv1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
@@ -556,10 +446,6 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
-	cs.batchV1beta1, err = batchv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
 	cs.certificatesV1, err = certificatesv1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
@@ -569,10 +455,6 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 		return nil, err
 	}
 	cs.certificatesV1alpha1, err = certificatesv1alpha1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.coordinationV1beta1, err = coordinationv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -588,15 +470,7 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
-	cs.discoveryV1beta1, err = discoveryv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
 	cs.eventsV1, err = eventsv1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.eventsV1beta1, err = eventsv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -605,18 +479,6 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 		return nil, err
 	}
 	cs.flowcontrolV1, err = flowcontrolv1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.flowcontrolV1beta1, err = flowcontrolv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.flowcontrolV1beta2, err = flowcontrolv1beta2.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.flowcontrolV1beta3, err = flowcontrolv1beta3.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -636,11 +498,6 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
-	cs.nodeV1alpha1, err = nodev1alpha1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.nodeV1beta1, err = nodev1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -668,11 +525,6 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
-	cs.schedulingV1alpha1, err = schedulingv1alpha1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.schedulingV1beta1, err = schedulingv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -718,8 +570,6 @@ func New(c rest.Interface) *Clientset {
 	cs.admissionregistrationV1beta1 = admissionregistrationv1beta1.New(c)
 	cs.internalV1alpha1 = internalv1alpha1.New(c)
 	cs.appsV1 = appsv1.New(c)
-	cs.appsV1beta1 = appsv1beta1.New(c)
-	cs.appsV1beta2 = appsv1beta2.New(c)
 	cs.authenticationV1 = authenticationv1.New(c)
 	cs.authenticationV1alpha1 = authenticationv1alpha1.New(c)
 	cs.authenticationV1beta1 = authenticationv1beta1.New(c)
@@ -730,36 +580,25 @@ func New(c rest.Interface) *Clientset {
 	cs.autoscalingV2beta1 = autoscalingv2beta1.New(c)
 	cs.autoscalingV2beta2 = autoscalingv2beta2.New(c)
 	cs.batchV1 = batchv1.New(c)
-	cs.batchV1beta1 = batchv1beta1.New(c)
 	cs.certificatesV1 = certificatesv1.New(c)
 	cs.certificatesV1beta1 = certificatesv1beta1.New(c)
 	cs.certificatesV1alpha1 = certificatesv1alpha1.New(c)
-	cs.coordinationV1beta1 = coordinationv1beta1.New(c)
 	cs.coordinationV1 = coordinationv1.New(c)
 	cs.coreV1 = corev1.New(c)
 	cs.discoveryV1 = discoveryv1.New(c)
-	cs.discoveryV1beta1 = discoveryv1beta1.New(c)
 	cs.eventsV1 = eventsv1.New(c)
-	cs.eventsV1beta1 = eventsv1beta1.New(c)
 	cs.extensionsV1beta1 = extensionsv1beta1.New(c)
 	cs.flowcontrolV1 = flowcontrolv1.New(c)
-	cs.flowcontrolV1beta1 = flowcontrolv1beta1.New(c)
-	cs.flowcontrolV1beta2 = flowcontrolv1beta2.New(c)
-	cs.flowcontrolV1beta3 = flowcontrolv1beta3.New(c)
 	cs.networkingV1 = networkingv1.New(c)
 	cs.networkingV1alpha1 = networkingv1alpha1.New(c)
 	cs.networkingV1beta1 = networkingv1beta1.New(c)
 	cs.nodeV1 = nodev1.New(c)
-	cs.nodeV1alpha1 = nodev1alpha1.New(c)
-	cs.nodeV1beta1 = nodev1beta1.New(c)
 	cs.policyV1 = policyv1.New(c)
 	cs.policyV1beta1 = policyv1beta1.New(c)
 	cs.rbacV1 = rbacv1.New(c)
 	cs.rbacV1beta1 = rbacv1beta1.New(c)
 	cs.rbacV1alpha1 = rbacv1alpha1.New(c)
 	cs.resourceV1alpha2 = resourcev1alpha2.New(c)
-	cs.schedulingV1alpha1 = schedulingv1alpha1.New(c)
-	cs.schedulingV1beta1 = schedulingv1beta1.New(c)
 	cs.schedulingV1 = schedulingv1.New(c)
 	cs.storageV1beta1 = storagev1beta1.New(c)
 	cs.storageV1 = storagev1.New(c)

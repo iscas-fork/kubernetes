@@ -33,7 +33,7 @@ curl -X POST \
 tag="v1.29.3.1"
 #release $tag
 
-for name in `ls staging/src/k8s.io/`
+for name in `ls ../staging/src/k8s.io/`
 do
   echo "staging/src/k8s.io/"$name"/"$tag
   release "staging/src/k8s.io/"$name"/"$tag

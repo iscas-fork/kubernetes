@@ -26,7 +26,6 @@ import (
 	"time"
 
 	"k8s.io/api/admission/v1beta1"
-	appsv1beta1 "k8s.io/api/apps/v1beta1"
 	authenticationv1 "k8s.io/api/authentication/v1"
 	corev1 "k8s.io/api/core/v1"
 	extensionsv1beta1 "k8s.io/api/extensions/v1beta1"
@@ -886,12 +885,6 @@ func testDeploymentRollback(c *testContext) {
 
 	var rollbackObj runtime.Object
 	switch c.gvr {
-	case gvr("apps", "v1beta1", "deployments/rollback"):
-		rollbackObj = &appsv1beta1.DeploymentRollback{
-			TypeMeta:   metav1.TypeMeta{APIVersion: "apps/v1beta1", Kind: "DeploymentRollback"},
-			Name:       obj.GetName(),
-			RollbackTo: appsv1beta1.RollbackConfig{Revision: 0},
-		}
 	case gvr("extensions", "v1beta1", "deployments/rollback"):
 		rollbackObj = &extensionsv1beta1.DeploymentRollback{
 			TypeMeta:   metav1.TypeMeta{APIVersion: "extensions/v1beta1", Kind: "DeploymentRollback"},

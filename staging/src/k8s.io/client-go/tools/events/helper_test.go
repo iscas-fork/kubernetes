@@ -21,7 +21,6 @@ import (
 
 	corev1 "k8s.io/api/core/v1"
 	eventsv1 "k8s.io/api/events/v1"
-	eventsv1beta1 "k8s.io/api/events/v1beta1"
 	"k8s.io/apimachinery/pkg/fields"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/types"
@@ -37,33 +36,6 @@ func TestGetFieldSelector(t *testing.T) {
 		expected                  fields.Set
 		expectedErr               bool
 	}{
-		{
-			desc:                      "events.k8s.io/v1beta1 event with empty parameters",
-			eventsGroupVersion:        eventsv1beta1.SchemeGroupVersion,
-			regardingName:             "",
-			regardingGroupVersionKind: schema.GroupVersionKind{},
-			regardingUID:              "",
-			expected:                  fields.Set{},
-			expectedErr:               false,
-		},
-		{
-			desc:               "events.k8s.io/v1beta1 event with non-empty parameters",
-			eventsGroupVersion: eventsv1beta1.SchemeGroupVersion,
-			regardingName:      "test-deployment",
-			regardingGroupVersionKind: schema.GroupVersionKind{
-				Kind:    "Deployment",
-				Group:   "apps",
-				Version: "v1",
-			},
-			regardingUID: "2c55cad7-ee4e-11e9-abe1-525400e7bc6b",
-			expected: fields.Set{
-				"regarding.name":       "test-deployment",
-				"regarding.kind":       "Deployment",
-				"regarding.apiVersion": "apps/v1",
-				"regarding.uid":        "2c55cad7-ee4e-11e9-abe1-525400e7bc6b",
-			},
-			expectedErr: false,
-		},
 		{
 			desc:                      "events.k8s.io/v1 event with empty parameters",
 			eventsGroupVersion:        eventsv1.SchemeGroupVersion,

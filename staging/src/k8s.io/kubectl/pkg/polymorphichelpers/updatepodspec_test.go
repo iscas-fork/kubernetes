@@ -20,10 +20,7 @@ import (
 	"testing"
 
 	appsv1 "k8s.io/api/apps/v1"
-	appsv1beta1 "k8s.io/api/apps/v1beta1"
-	appsv1beta2 "k8s.io/api/apps/v1beta2"
 	batchv1 "k8s.io/api/batch/v1"
-	batchv1beta1 "k8s.io/api/batch/v1beta1"
 	"k8s.io/api/core/v1"
 	extensionsv1beta1 "k8s.io/api/extensions/v1beta1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -48,22 +45,11 @@ func TestUpdatePodSpecForObject(t *testing.T) {
 			expect: true,
 		},
 		{
-			object: &appsv1beta1.Deployment{},
-			expect: true,
-		},
-		{
-			object: &appsv1beta2.Deployment{},
-			expect: true,
-		},
-		{
 			object: &appsv1.Deployment{},
 			expect: true,
 		},
 		{
 			object: &extensionsv1beta1.DaemonSet{},
-			expect: true,
-		}, {
-			object: &appsv1beta2.DaemonSet{},
 			expect: true,
 		},
 		{
@@ -75,19 +61,7 @@ func TestUpdatePodSpecForObject(t *testing.T) {
 			expect: true,
 		},
 		{
-			object: &appsv1beta2.ReplicaSet{},
-			expect: true,
-		},
-		{
 			object: &appsv1.ReplicaSet{},
-			expect: true,
-		},
-		{
-			object: &appsv1beta1.StatefulSet{},
-			expect: true,
-		},
-		{
-			object: &appsv1beta2.StatefulSet{},
 			expect: true,
 		},
 		{
@@ -96,10 +70,6 @@ func TestUpdatePodSpecForObject(t *testing.T) {
 		},
 		{
 			object: &batchv1.Job{},
-			expect: true,
-		},
-		{
-			object: &batchv1beta1.CronJob{},
 			expect: true,
 		},
 		{

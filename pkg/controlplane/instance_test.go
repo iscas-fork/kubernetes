@@ -21,6 +21,8 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"io"
+	discoveryv1beta1 "k8s.io/api/discovery/v1"
+	eventsv1beta1 "k8s.io/api/events/v1"
 	"net"
 	"net/http"
 	"net/http/httptest"
@@ -30,11 +32,7 @@ import (
 
 	autoscalingapiv2beta1 "k8s.io/api/autoscaling/v2beta1"
 	autoscalingapiv2beta2 "k8s.io/api/autoscaling/v2beta2"
-	batchapiv1beta1 "k8s.io/api/batch/v1beta1"
 	certificatesapiv1beta1 "k8s.io/api/certificates/v1beta1"
-	discoveryv1beta1 "k8s.io/api/discovery/v1beta1"
-	eventsv1beta1 "k8s.io/api/events/v1beta1"
-	nodev1beta1 "k8s.io/api/node/v1beta1"
 	policyapiv1beta1 "k8s.io/api/policy/v1beta1"
 	storageapiv1beta1 "k8s.io/api/storage/v1beta1"
 	extensionsapiserver "k8s.io/apiextensions-apiserver/pkg/apiserver"
@@ -58,7 +56,6 @@ import (
 	kubeversion "k8s.io/component-base/version"
 	aggregatorscheme "k8s.io/kube-aggregator/pkg/apiserver/scheme"
 	"k8s.io/kubernetes/pkg/api/legacyscheme"
-	flowcontrolv1bet3 "k8s.io/kubernetes/pkg/apis/flowcontrol/v1beta3"
 	"k8s.io/kubernetes/pkg/controlplane/reconcilers"
 	"k8s.io/kubernetes/pkg/controlplane/storageversionhashdata"
 	generatedopenapi "k8s.io/kubernetes/pkg/generated/openapi"
@@ -408,14 +405,6 @@ func TestDefaultVars(t *testing.T) {
 		}
 	}
 
-	// legacyBetaEnabledByDefaultResources should contain only beta version
-	for i := range legacyBetaEnabledByDefaultResources {
-		gv := legacyBetaEnabledByDefaultResources[i]
-		if !strings.Contains(gv.Version, "beta") {
-			t.Errorf("legacyBetaEnabledByDefaultResources should contain beta version, but found: %q", gv.String())
-		}
-	}
-
 	// betaAPIGroupVersionsDisabledByDefault should contain only beta version
 	for i := range betaAPIGroupVersionsDisabledByDefault {
 		gv := betaAPIGroupVersionsDisabledByDefault[i]
@@ -439,22 +428,11 @@ func TestNewBetaResourcesEnabledByDefault(t *testing.T) {
 	legacyEnabledBetaResources := map[schema.GroupVersionResource]bool{
 		autoscalingapiv2beta1.SchemeGroupVersion.WithResource("horizontalpodautoscalers"): true,
 		autoscalingapiv2beta2.SchemeGroupVersion.WithResource("horizontalpodautoscalers"): true,
-		batchapiv1beta1.SchemeGroupVersion.WithResource("cronjobs"):                       true,
 		discoveryv1beta1.SchemeGroupVersion.WithResource("endpointslices"):                true,
 		eventsv1beta1.SchemeGroupVersion.WithResource("events"):                           true,
-		nodev1beta1.SchemeGroupVersion.WithResource("runtimeclasses"):                     true,
 		policyapiv1beta1.SchemeGroupVersion.WithResource("poddisruptionbudgets"):          true,
 		policyapiv1beta1.SchemeGroupVersion.WithResource("podsecuritypolicies"):           true,
 		storageapiv1beta1.SchemeGroupVersion.WithResource("csinodes"):                     true,
-	}
-
-	// legacyBetaResourcesWithoutStableEquivalents contains those groupresources that were enabled by default as beta
-	// before we changed that policy and do not have stable versions. These resources are allowed to have additional
-	// beta versions enabled by default.  Nothing new should be added here.  There are no future exceptions because there
-	// are no more beta resources enabled by default.
-	legacyBetaResourcesWithoutStableEquivalents := map[schema.GroupResource]bool{
-		flowcontrolv1bet3.SchemeGroupVersion.WithResource("flowschemas").GroupResource():                 true,
-		flowcontrolv1bet3.SchemeGroupVersion.WithResource("prioritylevelconfigurations").GroupResource(): true,
 	}
 
 	config := DefaultAPIResourceConfigSource()
@@ -467,9 +445,6 @@ func TestNewBetaResourcesEnabledByDefault(t *testing.T) {
 		}
 		if legacyEnabledBetaResources[gvr] {
 			continue // this is a legacy beta resource
-		}
-		if legacyBetaResourcesWithoutStableEquivalents[gvr.GroupResource()] {
-			continue // this is another beta of a legacy beta resource with no stable equivalent
 		}
 		t.Errorf("no new beta resources can be enabled by default, see https://github.com/kubernetes/enhancements/blob/0ad0fc8269165ca300d05ca51c7ce190a79976a5/keps/sig-architecture/3136-beta-apis-off-by-default/README.md: %v", gvr)
 	}

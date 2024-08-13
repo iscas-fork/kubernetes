@@ -24,17 +24,18 @@ EOF
 
 curl -X POST \
   -H 'Accept: application/vnd.github+json' \
-  -H 'Authorization: token xxx' \
+  -H 'Authorization: Bearer ' \
   -H 'X-GitHub-Api-Version: 2022-11-28' \
   $url \
   -d "$data"
 }
 
-tag="v1.29.3.1"
-#release $tag
+tag="v1.29.3.2"
 
-for name in `ls staging/src/k8s.io/`
+for name in `ls ../staging/src/k8s.io/`
 do
   echo "staging/src/k8s.io/"$name"/"$tag
   release "staging/src/k8s.io/"$name"/"$tag
 done
+
+release $tag

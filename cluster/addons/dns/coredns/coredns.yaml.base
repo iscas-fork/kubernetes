@@ -133,7 +133,7 @@ spec:
         kubernetes.io/os: linux
       containers:
       - name: coredns
-        image: registry.k8s.io/coredns/coredns:v1.11.1
+        image: g-ubjg5602-docker.pkg.coding.net/iscas-system/containers/coredns:v1.11.1
         imagePullPolicy: IfNotPresent
         resources:
           limits:

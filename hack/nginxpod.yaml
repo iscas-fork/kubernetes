@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: g-ubjg5602-docker.pkg.coding.net/iscas-system/containers/nginx:official
+    ports:
+    - containerPort: 80

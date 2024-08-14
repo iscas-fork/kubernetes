@@ -522,3 +522,12 @@ else
 help:
 	hack/make-rules/make-help.sh
 endif
+
+
+local-k8s:
+	build/kill_process.sh
+	build/make-clean.sh
+	hack/make-rules/clean.sh
+	hack/local-up-cluster.sh
+kill-kube:
+	build/kill_process.sh

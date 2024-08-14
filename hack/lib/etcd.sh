@@ -27,6 +27,10 @@ export KUBE_INTEGRATION_ETCD_URL="http://${ETCD_HOST}:${ETCD_PORT}"
 
 kube::etcd::validate() {
   # validate if in path
+   if ! command -v kubectl &> /dev/null; then
+        cp ./hack/etcd /usr/local/bin/etcd
+        chmod +x /usr/local/bin/etcd
+  fi
   command -v etcd >/dev/null || {
     kube::log::usage "etcd must be in your PATH"
     kube::log::info "You can use 'hack/install-etcd.sh' to install a copy in third_party/."

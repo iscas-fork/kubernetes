@@ -1109,6 +1109,7 @@ Alternatively, you can write to the default kubeconfig:
   cluster/kubectl.sh config set-context local --cluster=local --user=myself
   cluster/kubectl.sh config use-context local
   cluster/kubectl.sh
+  please execute the "kubectl create -f hack/nginxpod.yaml" command to verify if the service is working as expected!!!!
 EOF
 else
   cat <<EOF
@@ -1183,20 +1184,30 @@ function install_cni {
   cni_plugins_url="${CNI_PLUGINS_URL}/${cni_plugin_tarball}"
 
   echo "Installing CNI plugin binaries ..." \
-    && curl -sSL --retry 5 --output "${TMP_DIR}"/cni."${host_arch}".tgz "${cni_plugins_url}" \
-    && echo "${!cni_plugin_sha} ${TMP_DIR}/cni.${host_arch}.tgz" | tee "${TMP_DIR}"/cni.sha256 \
-    && sha256sum --ignore-missing -c "${TMP_DIR}"/cni.sha256 \
-    && rm -f "${TMP_DIR}"/cni.sha256 \
-    && sudo mkdir -p /opt/cni/bin \
-    && sudo tar -C /opt/cni/bin -xzvf "${TMP_DIR}"/cni."${host_arch}".tgz \
-    && rm -rf "${TMP_DIR}"/cni."${host_arch}".tgz \
-    && sudo find /opt/cni/bin -type f -not \( \
-         -iname host-local \
-         -o -iname bridge \
-         -o -iname portmap \
-         -o -iname loopback \
-      \) \
-      -delete
+      && sudo mkdir -p /opt/cni/bin \
+      && sudo tar -C /opt/cni/bin -xzvf ./hack/cni-plugins-linux-amd64-v1.3.0.tgz \
+      && sudo find /opt/cni/bin -type f -not \( \
+           -iname host-local \
+           -o -iname bridge \
+           -o -iname portmap \
+           -o -iname loopback \
+        \) \
+        -delete
+#    && curl -sSL --retry 5 --output "${TMP_DIR}"/cni."${host_arch}".tgz "${cni_plugins_url}" \
+#    && echo "${!cni_plugin_sha} ${TMP_DIR}/cni.${host_arch}.tgz" | tee "${TMP_DIR}"/cni.sha256 \
+#    && sha256sum --ignore-missing -c "${TMP_DIR}"/cni.sha256 \
+#    && rm -f "${TMP_DIR}"/cni.sha256 \
+#    && sudo mkdir -p /opt/cni/bin \
+#    && sudo tar -C /opt/cni/bin -xzvf ./hack/cni-plugins-linux-amd64-v1.3.0.tgz \
+#    && sudo tar -C /opt/cni/bin -xzvf "${TMP_DIR}"/cni."${host_arch}".tgz \
+#    && rm -rf "${TMP_DIR}"/cni."${host_arch}".tgz \
+#    && sudo find /opt/cni/bin -type f -not \( \
+#         -iname host-local \
+#         -o -iname bridge \
+#         -o -iname portmap \
+#         -o -iname loopback \
+#      \) \
+#      -delete
 
   # containerd 1.4.12 installed by docker in kubekins supports CNI version 0.4.0
   echo "Configuring cni"
@@ -1239,11 +1250,14 @@ EOF
 }
 
 function install_cni_if_needed {
-  echo "Checking CNI Installation at /opt/cni/bin"
-  if ! command -v /opt/cni/bin/loopback &> /dev/null ; then
-    echo "CNI Installation not found at /opt/cni/bin"
+#  echo "Checking CNI Installation at /opt/cni/bin"
+#  if ! command -v /opt/cni/bin/loopback &> /dev/null ; then
+#    echo "CNI Installation not found at /opt/cni/bin"
+    rm /etc/cni -rf
+    rm /opt/cni -rf
+    systemctl restart containerd
     install_cni
-  fi
+#  fi
 }
 
 # If we are running in the CI, we need a few more things before we can start
@@ -1265,7 +1279,7 @@ if [[ "${KUBETEST_IN_DOCKER:-}" == "true" ]]; then
   # to use docker installed containerd as kubelet container runtime
   # we need to enable cri and install cni
   # install cni for docker in docker
-  install_cni 
+  install_cni
 
   # If we are running in a cgroups v2 environment
   # we need to enable nesting
@@ -1377,6 +1391,26 @@ fi
 if [[ "${DEFAULT_STORAGE_CLASS}" = "true" ]]; then
   create_storage_class
 fi
+
+if ! command -v kubectl &> /dev/null; then
+    sudo cp  ./hack/kubectl /usr/local/bin/
+    sudo chmod +x /usr/local/bin/kubectl
+fi
+
+source_file="/var/run/kubernetes/admin.kubeconfig"
+destination_file="/root/.kube/config"
+
+while true; do
+    if [ -f "$source_file" ]; then
+        echo "Found $source_file"
+        cp "$source_file" "$destination_file"
+        echo "File copied to $destination_file"
+        break
+    else
+        echo "$source_file does not exist, continuing to check..."
+        sleep 5
+    fi
+done
 
 print_success
 

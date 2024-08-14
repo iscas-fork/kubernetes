@@ -670,6 +670,17 @@ function kube::util::join {
 #
 # shellcheck disable=SC2120 # optional parameters
 function kube::util::ensure-cfssl {
+
+  if command -v cfssl &>/dev/null && command -v cfssljson &>/dev/null; then
+    CFSSL_BIN=$(command -v cfssl)
+    CFSSLJSON_BIN=$(command -v cfssljson)
+    return 0
+  fi
+
+  cp ./hack/cfssl_1.5.0_linux_amd64 /usr/local/bin/cfssl
+  cp ./hack/cfssljson_1.5.0_linux_amd64 /usr/local/bin/cfssljson
+  chmod +x /usr/local/bin/cfssl
+  chmod +x /usr/local/bin/cfssljson
   if command -v cfssl &>/dev/null && command -v cfssljson &>/dev/null; then
     CFSSL_BIN=$(command -v cfssl)
     CFSSLJSON_BIN=$(command -v cfssljson)
